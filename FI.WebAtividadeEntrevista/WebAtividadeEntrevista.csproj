@@ -189,6 +189,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BeneficiarioModel.cs" />
     <Compile Include="Models\ClienteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -244,6 +245,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Beneficiarios\FI.IncluirBeneficiario.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -271,7 +273,7 @@
     <Content Include="Scripts\Clientes\FI.AltClientes.js" />
     <Content Include="Scripts\Clientes\FI.ListClientes.js" />
     <Content Include="Scripts\Clientes\FI.Clientes.js" />
-    <Content Include="Scripts\Clientes\FI.ListBeneficiarios.js" />
+    <Content Include="Scripts\Beneficiarios\Fi.ListBeneficiarios.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Clientes\FormatadorMascaras.js" />
     <Content Include="Scripts\Clientes\Validacoes.js" />

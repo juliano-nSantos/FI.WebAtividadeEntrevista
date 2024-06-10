@@ -44,19 +44,7 @@ namespace WebAtividadeEntrevista.Controllers
                     return Json("CPF já esta cadastrado!");
                 }
 
-                model.Id = bo.Incluir(new Cliente()
-                {                    
-                    CEP = model.CEP,
-                    Cidade = model.Cidade,
-                    Email = model.Email,
-                    Estado = model.Estado,
-                    Logradouro = model.Logradouro,
-                    Nacionalidade = model.Nacionalidade,
-                    Nome = model.Nome,
-                    Sobrenome = model.Sobrenome,
-                    Telefone = model.Telefone,
-                    CPF = model.CPF
-                });
+                model.Id = bo.Incluir(MapParaEntidade(model));
 
            
                 return Json("Cadastro efetuado com sucesso");
@@ -85,20 +73,7 @@ namespace WebAtividadeEntrevista.Controllers
                     return Json("CPF já esta cadastrado!");
                 }
 
-                bo.Alterar(new Cliente()
-                {
-                    Id = model.Id,
-                    CEP = model.CEP,
-                    Cidade = model.Cidade,
-                    Email = model.Email,
-                    Estado = model.Estado,
-                    Logradouro = model.Logradouro,
-                    Nacionalidade = model.Nacionalidade,
-                    Nome = model.Nome,
-                    Sobrenome = model.Sobrenome,
-                    Telefone = model.Telefone,
-                    CPF = model.CPF
-                });
+                bo.Alterar(MapParaEntidade(model));
                                
                 return Json("Cadastro alterado com sucesso");
             }
@@ -113,25 +88,26 @@ namespace WebAtividadeEntrevista.Controllers
 
             if (cliente != null)
             {
-                model = new ClienteModel()
-                {
-                    Id = cliente.Id,
-                    CEP = cliente.CEP,
-                    Cidade = cliente.Cidade,
-                    Email = cliente.Email,
-                    Estado = cliente.Estado,
-                    Logradouro = cliente.Logradouro,
-                    Nacionalidade = cliente.Nacionalidade,
-                    Nome = cliente.Nome,
-                    Sobrenome = cliente.Sobrenome,
-                    Telefone = cliente.Telefone,
-                    CPF = cliente.CPF
-                };
-
-            
+                model = MapParaModel(cliente);           
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        public JsonResult ExcluirBeneficiario(long idBeneficiario)
+        {   
+            if(idBeneficiario <= 0)
+            {
+                Response.StatusCode = 400;
+                return Json("informe um id de beneficiario para excluir");
+            }
+
+            BoBeneficiario bo = new BoBeneficiario();
+
+            bo.Excluir(idBeneficiario);
+
+            return Json("Beneficiario excluido com sucesso");
         }
 
         [HttpPost]
@@ -159,6 +135,74 @@ namespace WebAtividadeEntrevista.Controllers
             {
                 return Json(new { Result = "ERROR", Message = ex.Message });
             }
+        }
+
+        private ClienteModel MapParaModel(Cliente cliente)
+        {
+            var model = new ClienteModel()
+            {
+                Id = cliente.Id,
+                CEP = cliente.CEP,
+                Cidade = cliente.Cidade,
+                Email = cliente.Email,
+                Estado = cliente.Estado,
+                Logradouro = cliente.Logradouro,
+                Nacionalidade = cliente.Nacionalidade,
+                Nome = cliente.Nome,
+                Sobrenome = cliente.Sobrenome,
+                Telefone = cliente.Telefone,
+                CPF = cliente.CPF
+            };
+
+            if (cliente.Beneficiarios == null)
+                return model;
+
+            foreach (var ben in cliente.Beneficiarios)
+            {
+                model.Beneficiarios.Add(new BeneficiarioModel()
+                {
+                    Id = ben.Id,
+                    CPF = ben.CPF,
+                    Nome = ben.Nome,
+                    IdCliente = ben.IdCliente
+                });
+            }
+
+            return model;
+        }
+
+        private Cliente MapParaEntidade(ClienteModel model)
+        {
+            var cliente = new Cliente()
+            {
+                Id = model.Id,
+                CEP = model.CEP,
+                Cidade = model.Cidade,
+                Email = model.Email,
+                Estado = model.Estado,
+                Logradouro = model.Logradouro,
+                Nacionalidade = model.Nacionalidade,
+                Nome = model.Nome,
+                Sobrenome = model.Sobrenome,
+                Telefone = model.Telefone,
+                CPF = model.CPF
+            };
+
+            if (model.Beneficiarios == null)
+                return cliente;
+
+            foreach (var bene in model.Beneficiarios)
+            {
+                cliente.Beneficiarios.Add(new Beneficiario()
+                {
+                    Id = bene.Id,
+                    CPF = bene.CPF,
+                    Nome = bene.Nome,
+                    IdCliente = bene.IdCliente
+                });
+            }
+
+            return cliente;
         }
     }
 }

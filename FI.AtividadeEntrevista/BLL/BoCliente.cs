@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace FI.AtividadeEntrevista.BLL
 {
@@ -11,8 +12,19 @@ namespace FI.AtividadeEntrevista.BLL
         public long Incluir(DML.Cliente cliente)
         {
             DAL.DaoCliente cli = new DAL.DaoCliente();
+            DAL.Beneficiarios.DaoBeneficiario ben = new DAL.Beneficiarios.DaoBeneficiario();
 
-            return cli.Incluir(cliente);
+            var idCliente = cli.Incluir(cliente);
+
+            foreach (var item in cliente.Beneficiarios)
+            {
+                item.IdCliente = idCliente;
+
+                if(!ben.VerificarExistencia(item.CPF, idCliente))
+                    ben.Incluir(item);
+            }
+
+            return idCliente;
         }
 
         /// <summary>
@@ -22,6 +34,16 @@ namespace FI.AtividadeEntrevista.BLL
         public void Alterar(DML.Cliente cliente)
         {
             DAL.DaoCliente cli = new DAL.DaoCliente();
+            DAL.Beneficiarios.DaoBeneficiario ben = new DAL.Beneficiarios.DaoBeneficiario();                   
+
+            foreach (var item in cliente.Beneficiarios)
+            {
+                item.IdCliente = cliente.Id;
+
+                if (!ben.VerificarExistencia(item.CPF, cliente.Id))
+                    ben.Incluir(item);
+            }
+
             cli.Alterar(cliente);
         }
 
@@ -33,7 +55,12 @@ namespace FI.AtividadeEntrevista.BLL
         public DML.Cliente Consultar(long id)
         {
             DAL.DaoCliente cli = new DAL.DaoCliente();
-            return cli.Consultar(id);
+            DAL.Beneficiarios.DaoBeneficiario ben = new DAL.Beneficiarios.DaoBeneficiario();
+
+            var cliente = cli.Consultar(id);
+            cliente.Beneficiarios = ben.ListarBeneficiarios(id);
+
+            return cliente;
         }
 
         /// <summary>

@@ -1,10 +1,5 @@
-﻿//var cpf = document.getElementById("CPF");
-
-//cpf.addEventListener('onload', formatar("###.###.###-##", cpf), false);
-
-$(document).ready(function () {
-    if (obj) {
-        //var cpf = formatarValor("###.###.###-##", obj.CPF);
+﻿$(document).ready(function () {    
+    if (obj) {        
         $('#formCadastro #Nome').val(obj.Nome);
         $('#formCadastro #CEP').val(formatarValor("#####-###", obj.CEP));
         $('#formCadastro #CPF').val(formatarValor("###.###.###-##", obj.CPF));
@@ -15,11 +10,44 @@ $(document).ready(function () {
         $('#formCadastro #Cidade').val(obj.Cidade);
         $('#formCadastro #Logradouro').val(obj.Logradouro);
         $('#formCadastro #Telefone').val(formatarValor("(##) ####-####", obj.Telefone));
+
+        obj.Beneficiarios.forEach((item) =>
+            card(item)
+        );        
     }
 
+    function card(beneficiario) {
+        const content = `
+        <input type="hidden" id="Id" value="${beneficiario.Id}"/>
+        <td class="cpf">${formatarValor("###.###.###-##",beneficiario.CPF)}</td>
+        <td class="nome">${beneficiario.Nome}</td>
+        <td><button class="btn btn-sm btn-primary"> Atualizar</button>
+        <button class="btn btn-sm btn-primary" onclick="excluirBeneficiario(${beneficiario.Id})">Excluir</button></td>
+        `
+        const card = document.createElement("tr")
+        card.innerHTML = content;
+
+        document.querySelector("#listBeneficiarios")
+            .appendChild(card);
+    }
+
+    function encapsulaTabelaBeneficiario() {
+        var listTabela = [];        
+
+        $.each($("#modal-benef").find("#gridBeneficiarios > tbody > tr"), function (index, value) {
+            var linhaTabela = $(this);
+            var itemTabela = {
+                CPF: linhaTabela.find(".cpf").text().replace(/\D+/g, ''),
+                NOME: linhaTabela.find(".nome").text()
+            };
+            listTabela.push(itemTabela);
+        });
+
+        return listTabela;
+    }   
+
     $('#formCadastro').submit(function (e) {
-        e.preventDefault();
-        
+        e.preventDefault();        
         $.ajax({
             url: urlPost,
             method: "POST",
@@ -33,7 +61,8 @@ $(document).ready(function () {
                 "Estado": $(this).find("#Estado").val(),
                 "Cidade": $(this).find("#Cidade").val(),
                 "Logradouro": $(this).find("#Logradouro").val(),
-                "Telefone": $(this).find("#Telefone").val().replace(/\D+/g, '')
+                "Telefone": $(this).find("#Telefone").val().replace(/\D+/g, ''),
+                "Beneficiarios": encapsulaTabelaBeneficiario()
             },
             error:
             function (r) {

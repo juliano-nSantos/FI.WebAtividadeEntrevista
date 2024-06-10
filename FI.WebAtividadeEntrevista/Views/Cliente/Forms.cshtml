@@ -113,21 +113,30 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="CPF">CPF:</label>
-                                <input required="required" type="text" class="form-control" id="CPF" name="CPFBeneficiario" placeholder="Ex.: 010.011.111-00" maxlength="14" onkeypress="formatar('###.###.###-##', this)" onblur="validaCpf(this.value)">
+                                <input required="required" type="text" class="form-control" id="CPFBeneficiario" name="CPFBeneficiario" placeholder="Ex.: 010.011.111-00" maxlength="14" onkeypress="formatar('###.###.###-##', this)" onblur="validaCpf(this.value)">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="Nome">Nome:</label>
-                                <input required="required" type="text" class="form-control" id="Nome" name="NomeBeneficiario" placeholder="Ex.: João" maxlength="50">
+                                <input required="required" type="text" class="form-control" id="NomeBeneficiario" name="NomeBeneficiario" placeholder="Ex.: João" maxlength="50">
                             </div>
                         </div>                        
                         <div class="col-md-4">                       
-                            <button type="submit" class="btn btn-sm btn-success" id="btnIncluir">Incluir</button>
+                            <button type="button" class="btn btn-sm btn-success" id="btnIncluir" onclick="adicionarLinha()">Incluir</button>
                         </div>
                     </div>
                     <div class="row">
-                        <table id="gridBeneficiarios" class="table-striped"></table>
+                        <table id="gridBeneficiarios" class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>CPF</th>
+                                    <th>Nome</th>
+                                    <th></th>
+                                </tr>                                
+                            </thead>
+                            <tbody id="listBeneficiarios"></tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -137,3 +146,5 @@
         </div>
     </div>
 </div>
+
+@Scripts.Render("~/bundles/incluirBeneficiario")

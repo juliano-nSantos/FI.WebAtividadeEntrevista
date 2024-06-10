@@ -22,3 +22,9 @@ C:\Users\juliano\Downloads\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\obj\
 C:\Users\juliano\Downloads\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.csproj.CoreCompileInputs.cache
 C:\Users\juliano\Downloads\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.dll
 C:\Users\juliano\Downloads\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.pdb
+C:\Users\juliano.santos\Documents\CursosBalta\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\bin\Debug\FI.AtividadeEntrevista.dll
+C:\Users\juliano.santos\Documents\CursosBalta\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\bin\Debug\FI.AtividadeEntrevista.pdb
+C:\Users\juliano.santos\Documents\CursosBalta\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.csproj.AssemblyReference.cache
+C:\Users\juliano.santos\Documents\CursosBalta\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.csproj.CoreCompileInputs.cache
+C:\Users\juliano.santos\Documents\CursosBalta\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.dll
+C:\Users\juliano.santos\Documents\CursosBalta\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.pdb

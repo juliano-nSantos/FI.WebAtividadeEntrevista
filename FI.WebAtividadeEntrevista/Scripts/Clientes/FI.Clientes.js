@@ -1,4 +1,22 @@
 ﻿$(document).ready(function () {
+    function encapsulaTabelaBeneficiario() {
+        var listTabela = [];
+
+        var tableBen = $("#modal-benef").find("#gridBeneficiarios > tbody > tr");
+        var cpf = tableBen.find(".cpf").text();
+
+        $.each($("#modal-benef").find("#gridBeneficiarios > tbody > tr"), function (index, value) {
+            var linhaTabela = $(this);
+            var itemTabela = {
+                CPF: linhaTabela.find(".cpf").text().replace(/\D+/g, ''),
+                NOME: linhaTabela.find(".nome").text()
+            };
+            listTabela.push(itemTabela);
+        });
+
+        return listTabela;
+    }
+
     $('#formCadastro').submit(function (e) {         
             e.preventDefault();
             $.ajax({
@@ -14,8 +32,9 @@
                     "Estado": $(this).find("#Estado").val(),
                     "Cidade": $(this).find("#Cidade").val(),
                     "Logradouro": $(this).find("#Logradouro").val(),
-                    "Telefone": $(this).find("#Telefone").val().replace(/\D+/g, '')
-                },
+                    "Telefone": $(this).find("#Telefone").val().replace(/\D+/g, ''),
+                    "Beneficiarios": encapsulaTabelaBeneficiario()                    
+                },                
                 error:
                     function (r) {
                         if (r.status == 400)
@@ -27,8 +46,8 @@
                     function (r) {
                         ModalDialog("Sucesso!", r)
                         $("#formCadastro")[0].reset();
-                    }
-            });                                
+                    }                
+            });       
     })    
 })
 

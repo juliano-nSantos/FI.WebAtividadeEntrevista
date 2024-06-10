@@ -37,6 +37,11 @@ namespace WebAtividadeEntrevista
             bundles.Add(new ScriptBundle("~/bundles/validacoes").Include(
                 "~/Scripts/Clientes/Validacoes.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/listBeneficiarios").Include(
+                "~/Scripts/Beneficiarios/Fi.ListBeneficiarios.js"));
+            bundles.Add(new ScriptBundle("~/bundles/incluirBeneficiario").Include(
+                "~/Scripts/Beneficiarios/FI.IncluirBeneficiario.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
