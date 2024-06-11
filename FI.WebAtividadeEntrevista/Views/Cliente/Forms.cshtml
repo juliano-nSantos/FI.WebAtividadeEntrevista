@@ -112,6 +112,7 @@
                     <div class="row" id="areaIncluir">
                         <div class="col-md-4">
                             <div class="form-group">
+                                <input type="hidden" id="IdBeneficiario" value="" />
                                 <label for="CPF">CPF:</label>
                                 <input required="required" type="text" class="form-control" id="CPFBeneficiario" name="CPFBeneficiario" placeholder="Ex.: 010.011.111-00" maxlength="14" onkeypress="formatar('###.###.###-##', this)" onblur="validaCpf(this.value)">
                             </div>

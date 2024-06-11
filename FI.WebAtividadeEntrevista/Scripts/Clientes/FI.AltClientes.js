@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {    
+﻿$(document).ready(function () {
     if (obj) {        
         $('#formCadastro #Nome').val(obj.Nome);
         $('#formCadastro #CEP').val(formatarValor("#####-###", obj.CEP));
@@ -21,8 +21,13 @@
         <input type="hidden" id="Id" value="${beneficiario.Id}"/>
         <td class="cpf">${formatarValor("###.###.###-##",beneficiario.CPF)}</td>
         <td class="nome">${beneficiario.Nome}</td>
-        <td><button class="btn btn-sm btn-primary"> Atualizar</button>
-        <button class="btn btn-sm btn-primary" onclick="excluirBeneficiario(${beneficiario.Id})">Excluir</button></td>
+        <td>
+            <button type="button" class="btn btn-sm btn-primary"
+                onclick="editarBeneficiario(event, {id: ${beneficiario.Id}, cpf: '${formatarValor("###.###.###-##",
+                    beneficiario.CPF)}', nome: '${beneficiario.Nome}'})"> Atualizar</button>
+            <button class="btn btn-sm btn-primary"
+                onclick="excluirBeneficiario(${beneficiario.Id})">Excluir</button>
+        </td>
         `
         const card = document.createElement("tr")
         card.innerHTML = content;
@@ -38,13 +43,14 @@
             var linhaTabela = $(this);
             var itemTabela = {
                 CPF: linhaTabela.find(".cpf").text().replace(/\D+/g, ''),
-                NOME: linhaTabela.find(".nome").text()
+                NOME: linhaTabela.find(".nome").text(),
+                Id: linhaTabela.find("#Id").val()
             };
             listTabela.push(itemTabela);
         });
 
         return listTabela;
-    }   
+    }    
 
     $('#formCadastro').submit(function (e) {
         e.preventDefault();        
@@ -81,6 +87,15 @@
     })
     
 })
+
+function editarBeneficiario(event, obj) {
+
+    document.getElementById("CPFBeneficiario").value = obj.cpf;
+
+    document.getElementById("NomeBeneficiario").value = obj.nome;
+    document.getElementById("IdBeneficiario").value = obj.id;
+    document.getElementById("btnIncluir").textContent = "Salvar";    
+}
 
 function ModalDialog(titulo, texto) {
     var random = Math.random().toString().replace('.', '');

@@ -40,8 +40,12 @@ namespace FI.AtividadeEntrevista.BLL
             {
                 item.IdCliente = cliente.Id;
 
-                if (!ben.VerificarExistencia(item.CPF, cliente.Id))
+                if (item.Id > 0)
+                    ben.Alterar(item);
+
+                else if (!ben.VerificarExistencia(item.CPF, cliente.Id))
                     ben.Incluir(item);
+                                   
             }
 
             cli.Alterar(cliente);
