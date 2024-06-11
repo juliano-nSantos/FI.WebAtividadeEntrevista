@@ -273,7 +273,6 @@
     <Content Include="Scripts\Clientes\FI.AltClientes.js" />
     <Content Include="Scripts\Clientes\FI.ListClientes.js" />
     <Content Include="Scripts\Clientes\FI.Clientes.js" />
-    <Content Include="Scripts\Beneficiarios\Fi.ListBeneficiarios.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Clientes\FormatadorMascaras.js" />
     <Content Include="Scripts\Clientes\Validacoes.js" />
